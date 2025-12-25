@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EIDOS – Autonomous AI Agent</title>
+
+<meta name="description" content="EIDOS는 판단이 어려운 순간, 다음 행동 하나를 제시하는 자율 AI 에이전트입니다. 정보 과부하 속에서 명확한 결정을 내리세요.">
+<meta property="og:title" content="EIDOS – Autonomous AI Agent">
+<meta property="og:description" content="멈춰 있는 순간을 넘어가기 위해. EIDOS가 지금 이 순간 가장 합리적인 다음 행동 하나를 제시합니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eidos.example.com/">
+<meta property="og:image" content="https://eidos.example.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EIDOS – Autonomous AI Agent">
+<meta name="twitter:description" content="멈춰 있는 순간을 넘어가기 위해. EIDOS가 지금 이 순간 가장 합리적인 다음 행동 하나를 제시합니다.">
+<meta name="twitter:image" content="https://eidos.example.com/twitter-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0d12;
+  --card: rgba(255,255,255,0.06);
+  --primary: linear-gradient(135deg,#6ae3ff,#8b5cff,#ff6ec7);
+  --glow: 0 0 30px rgba(140,100,255,.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #11162a, #07080d);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px clamp(1.5rem, 5vw, 3rem);
+  background: rgba(11, 13, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+}
+
+header nav a {
+  color: #cfd3ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .3s;
+}
+
+header nav a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(200,120,255,.6);
+}
+
+header nav a[aria-current="page"] {
+  background: var(--primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+header nav .cta-button {
+  background: var(--primary);
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(140,100,255,.3);
+  transition: transform .3s, box-shadow .3s, color .3s;
+}
+
+header nav .cta-button:hover {
+  color: #000;
+  text-shadow: none;
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(200,120,255,.6);
+}
+
+section {
+  padding: 120px 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: var(--primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 3s infinite alternate;
+}
+
+.hero p {
+  margin-top: 32px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #cfd3ff;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(120,120,255,.3); }
+  to { text-shadow: 0 0 30px rgba(200,120,255,.6); }
+}
+
+.problem {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 32px;
+  margin-top: 80px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 32px;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: var(--glow);
+  transition: transform .4s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #b8bdfc;
+  line-height: 1.7;
+}
+
+.divider {
+  margin: 140px auto;
+  height: 1px;
+  width: 80%;
+  background: linear-gradient(to right, transparent, #6ae3ff, transparent);
+  border: 0;
+}
+
+.product h2,
+.cta h2 {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.product p {
+  text-align: center;
+  color: #cfd3ff;
+  max-width: 720px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 28px;
+  margin-top: 64px;
+}
+
+.cta {
+  text-align: center;
+  margin-top: 120px;
+}
+
+.cta a {
+  display: inline-block;
+  padding: 20px 48px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #000;
+  text-decoration: none;
+  box-shadow: 0 0 40px rgba(140,100,255,.6);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.cta a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(200,120,255,.9);
+}
+
+.cta p {
+  margin-bottom: 48px;
+  color: #cfd3ff;
+}
+
+.reveal > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+footer {
+  text-align: center;
+  padding: 60px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  color: #888;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color .3s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Accessibility & Utilities */
+:focus-visible {
+  outline: 2px solid #8b5cff;
+  outline-offset: 4px;
+  border-radius: 4px;
+  transition: outline-offset 0.1s ease;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  header nav {
+    position: fixed;
+    inset: 0 0 0 30%;
+    z-index: 10;
+    background: rgba(11, 13, 18, 0.95);
+    backdrop-filter: blur(15px);
+    transform: translateX(100%);
+    transition: transform 350ms ease-out;
+  }
+  
+  body.nav-open header nav {
+    transform: translateX(0%);
+  }
+  
+  header nav ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 48px;
+  }
+
+  header nav a {
+    font-size: 1.2rem;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2rem;
+    height: 2rem;
+    top: 24px;
+    right: 40px;
+    border: 0;
+    cursor: pointer;
+    transition: transform .2s;
+  }
+
+  .nav-toggle:hover {
+    transform: scale(1.1);
+  }
+  
+  body.nav-open .nav-toggle {
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6l18 18M24 6L6 24'/%3e%3c/svg%3e");
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#home" class="logo">EIDOS</a>
+  <nav>
+    <ul id="primary-navigation">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#cta" class="cta-button">Start Now</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+    <span class="sr-only">Menu</span>
+  </button>
+</header>
+
+<main>
+
+<section id="home" class="hero" aria-labelledby="hero-heading">
+  <h1 id="hero-heading">멈춰 있는 순간을<br/>넘어가기 위해</h1>
+  <p>
+    할 일은 많은데<br/>
+    지금 무엇을 해야 할지 몰라<br/>
+    화면만 바라보고 있는 순간이 있다면.
+  </p>
+
+  <div class="problem reveal">
+    <div class="card">
+      <h3>판단이 필요한 순간</h3>
+      <p>정보는 충분하지만, 선택이 많아 아무 것도 결정하지 못하는 상태.</p>
+    </div>
+    <div class="card">
+      <h3>자동화가 해결하지 못하는 영역</h3>
+      <p>결정은 여전히 사람의 몫이고, 그 부담은 혼자 감당해야 합니다.</p>
+    </div>
+    <div class="card">
+      <h3>시간은 계속 흐릅니다</h3>
+      <p>아무 것도 하지 않는 선택 역시, 하나의 결정이 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="product" class="product" aria-labelledby="product-heading">
+  <h2 id="product-heading">EIDOS</h2>
+  <p>
+    EIDOS는 판단을 대신하지 않습니다.<br/>
+    대신, 지금 이 순간 가장 합리적인<br/>
+    <strong>‘다음 행동 하나’</strong>를 단정적으로 제시합니다.
+  </p>
+
+  <div class="features reveal">
+    <div class="card">
+      <h3>단 하나의 행동</h3>
+      <p>선택지를 나열하지 않습니다. 항상 하나의 실행만 반환합니다.</p>
+    </div>
+    <div class="card">
+      <h3>내부 시뮬레이션 기반</h3>
+      <p>하지 않았을 때의 결과까지 고려한 결정 로직.</p>
+    </div>
+    <div class="card">
+      <h3>일관된 결정 엔진</h3>
+      <p>같은 입력에는 항상 같은 판단을 제공합니다.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="cta" class="cta reveal" aria-labelledby="cta-heading">
+  <h2 id="cta-heading">지금, 멈춰 있습니까?</h2>
+  <p>
+    생각을 더 늘리지 말고<br/>
+    다음 행동으로 넘어가십시오.
+  </p>
+
+  <!-- 결제 링크 교체 -->
+  <a href="https://your-checkout-link-here">
+    구독 시작하기
+  </a>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+  </div>
+  <p>© 2025 EIDOS. Decision Support System.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Smooth scrolling for anchor links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        // The logo links to #home, which is a valid section
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // --- Active navigation link on scroll ---
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('header nav a');
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.removeAttribute('aria-current');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.setAttribute('aria-current', 'page');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    sections.forEach(section => navObserver.observe(section));
+
+    // --- Scroll reveal animation ---
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            target.classList.add('visible');
+            const children = Array.from(target.children);
+            children.forEach((child, index) => {
+              child.style.transitionDelay = `${index * 150}ms`;
+            });
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+      revealElements.forEach(el => el.classList.add('visible'));
+    }
+
+    // --- Mobile navigation toggle ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const primaryNav = document.querySelector('#primary-navigation');
+    if (navToggle && primaryNav) {
+      navToggle.addEventListener('click', () => {
+        document.body.classList.toggle('nav-open');
+        const isVisible = document.body.classList.contains('nav-open');
+        navToggle.setAttribute('aria-expanded', isVisible);
+      });
+
+      primaryNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          // Smooth scroll is handled by the general anchor handler
+          // We just need to close the mobile menu
+          document.body.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', false);
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
